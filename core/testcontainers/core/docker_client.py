@@ -47,6 +47,7 @@ class DockerClient:
     def run(
         self,
         image: str,
+        dockerfile: Optional[str] = None,
         command: Optional[Union[str, list[str]]] = None,
         environment: Optional[dict] = None,
         ports: Optional[dict] = None,
@@ -56,6 +57,10 @@ class DockerClient:
         remove: bool = False,
         **kwargs,
     ) -> Container:
+
+        if dockerfile:
+            image, _ = self.client.images.build(path=dockerfile, tag=image)
+
         container = self.client.containers.run(
             image,
             command=command,
