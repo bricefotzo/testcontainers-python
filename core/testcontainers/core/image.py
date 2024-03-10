@@ -13,6 +13,18 @@ LOGGER = setup_logger(__name__)
 class DockerImage:
     """
     Thin wrapper around :class:`docker.models.images.ImageCollection` for a more functional interface.
+
+    .. doctest::
+            >>> from testcontainers.core.image import DockerImage
+
+            >>> image = DockerImage().from_dockerfile(path="core/tests/", tag="testcontainers/test-image")
+            >>> image.exists("testcontainers/test-image")
+            True
+            >>> image.get("testcontainers/test-image").id
+            'sha256:...'
+            >>> image.remove(force=True)
+            >>> image.exists("testcontainers/test-image")
+            False
     """
 
     def __init__(self, docker_client_kw: Optional[dict] = None, **kwargs) -> None:
