@@ -12,7 +12,7 @@ LOGGER = setup_logger(__name__)
 
 class DockerImage:
     """
-    Thin wrapper around :class:`docker.models.images.ImageCollection` for a more functional interface.
+    Basic class to manage docker images.
 
     .. doctest::
             >>> from testcontainers.core.image import DockerImage
